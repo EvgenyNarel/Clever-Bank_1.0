@@ -1,0 +1,4 @@
+flyway:
+  url: jdbc:postgresql://localhost:5433/banks
+  user: admin
+  password: admin
