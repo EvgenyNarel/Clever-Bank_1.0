@@ -1,7 +1,5 @@
 package org.narel.dao;
 
-import org.narel.entity.Customer;
-
 import java.util.UUID;
 
 public interface EntityDao<T> {

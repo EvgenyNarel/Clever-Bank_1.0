@@ -1,87 +1,76 @@
 package org.narel.dao.impl;
 
+import org.narel.connection.Pool;
+import org.narel.dao.BaseDao;
 import org.narel.dao.OperationDao;
-import org.narel.entity.Customer;
 import org.narel.entity.Operation;
+import org.narel.exception.DAOException;
+import org.narel.mapper.ResultSetMapper;
 
 import java.sql.*;
-import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
-import static org.narel.entity.enums.OperationKind.TRANSFER;
-
 public class OperationDaoImpl extends BaseDao<Operation> implements OperationDao {
-    public static void main(String[] args) {
-        Customer sender = new Customer();
-        sender.setId(UUID.fromString("c58c7e62-3501-41e0-9461-4af251e3804d"));
-
-        Customer recipient = new Customer();
-        recipient.setId(UUID.fromString("f7500bc3-955a-44c2-868b-13576d8eb874"));
-
-        new OperationDaoImpl().create(Operation.builder()
-                        .id(UUID.fromString("dt1dfe9b-fb59-4490-813d-69abb4201371"))
-                                .sender(sender)
-                                        .recipient(recipient)
-                                                .operationKind(TRANSFER)
-                                                        .amount()
-                build());
-
-        new OperationDaoImpl().create(new Operation(UUID.fromString("dt1dfe9b-fb59-4490-813d-69abb4201371"),
-                 UUID.fromString("c58c7e62-3501-41e0-9461-4af251e3804d"),
-                 UUID.fromString("f7500bc3-955a-44c2-868b-13576d8eb874"),
-                 TRANSFER,100000, Instant.EPOCH));
-    }
 
     private static final String GET_OPERATION_BY_ID_QUERY = "SELECT id, senderid, recipientid, kind, amount, operationdate FROM operation WHERE id = ?::uuid";
-    private static final String DELETE_OPERATION = "DELETE FROM operation WHERE id = ?::uuid";
+    private static final String DELETE_OPERATION_QUERY = "DELETE FROM operation WHERE id = ?::uuid";
+    private static final String ADD_OPERATION_QUERY = "INSERT INTO operation(id, senderid, recipientid, kind, amount, operationdate) VALUES (?::uuid, ?::uuid, ?::uuid, ?, ?, ?)";
+    private static final String GET_OPERATION_BY_CUSTOMER_ID = "SELECT id,senderid,recipientid,kind,amount,operationdate FROM operation WHERE senderid = ?::uuid or recipientid = ?::uuid";
+
+    public OperationDaoImpl(Pool poll) {
+        super(poll);
+    }
 
     @Override
     public Operation findById(UUID id) {
-
-        return findById(GET_OPERATION_BY_ID_QUERY,id,Operation.class);
+        return findById(GET_OPERATION_BY_ID_QUERY, id, Operation.class);
     }
 
     @Override
     public Operation create(Operation entity) {
-
-        String ADD_OPERATION = "INSERT INTO operation(id, senderid, recipientid, kind, amount, operationdate) VALUES (?::uuid, ?::uuid, ?::uuid, ?, ?, ?)";
         try (Connection connection = poll.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(ADD_OPERATION, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, String.valueOf(entity.getId()));
-            preparedStatement.setString(2, String.valueOf(entity.getSender().getId()));
-            preparedStatement.setString(3, String.valueOf(entity.getRecipient().getId()));
-            preparedStatement.setString(4, entity.getOperationKind().getKind());
-            preparedStatement.setBigDecimal(5, entity.getAmount());
-            preparedStatement.setTimestamp(7, new java.sql.Timestamp(entity.getOperationDate().toEpochMilli()));
-            if (preparedStatement.executeUpdate() == 0) {
-                throw new IllegalStateException();
+             PreparedStatement statement = connection.prepareStatement(ADD_OPERATION_QUERY, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, String.valueOf(entity.getId()));
+            statement.setString(2, String.valueOf(entity.getSender().getId()));
+            statement.setString(3, String.valueOf(entity.getRecipient().getId()));
+            statement.setString(4, entity.getOperationKind().getKind());
+            statement.setBigDecimal(5, entity.getAmount());
+            statement.setTimestamp(6, new java.sql.Timestamp(entity.getOperationDate().toEpochMilli()));
+            if (statement.executeUpdate() == 0) {
+                throw new DAOException("Creating the operation is failed, no rows is affected");
             }
-            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            ResultSet generatedKeys = statement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 entity.setId(generatedKeys.getObject(1, UUID.class));
             } else {
-                throw new IllegalStateException();
+                throw new DAOException("The operation key isn't fetched from database");
             }
         } catch (SQLException e) {
-            throw new IllegalStateException(e);
+            throw new DAOException(e);
         }
         return entity;
     }
 
     @Override
     public Operation update(Operation entity) {
-        return null;
+        throw new UnsupportedOperationException("The operation update isn't a valid query");
     }
 
     @Override
     public void delete(UUID id) {
-        delete(DELETE_OPERATION,id);
+        delete(DELETE_OPERATION_QUERY, id);
 
     }
 
     @Override
     public List<Operation> getByCustomerId(UUID customerId) {
-        return null;
+        try (Connection connection = poll.getConnection(); PreparedStatement statement = connection.prepareStatement(GET_OPERATION_BY_CUSTOMER_ID)) {
+            statement.setString(1, String.valueOf(customerId));
+            return ResultSetMapper.mapObjects(statement.executeQuery(), Operation.class);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
     }
 }
+
