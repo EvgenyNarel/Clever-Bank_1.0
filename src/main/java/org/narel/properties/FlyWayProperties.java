@@ -1,13 +1,12 @@
 package org.narel.properties;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-
+@Data
 public class FlyWayProperties {
+
     private String url;
     private String user;
     private String password;
 }
+

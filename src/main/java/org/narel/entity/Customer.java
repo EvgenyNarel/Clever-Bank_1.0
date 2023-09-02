@@ -6,12 +6,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
-
-
-public class Customer {
+public class Customer implements Entity {
 
     private UUID id;
     private String fullName;
-    private List<Account> accounts;
-
 }

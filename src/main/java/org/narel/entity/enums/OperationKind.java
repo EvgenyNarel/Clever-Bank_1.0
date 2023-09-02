@@ -7,8 +7,7 @@ import lombok.RequiredArgsConstructor;
 public enum OperationKind {
     REPLENISHMENT("Пополнение"),
     WITHDRAWAL("Снятие"),
-    TRANSFER("Перевод"),
-    STATEMENT("Выписка");
+    TRANSFER("Перевод");
 
     private final String kind;
 
