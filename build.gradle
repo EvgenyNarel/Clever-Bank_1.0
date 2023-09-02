@@ -4,7 +4,6 @@ plugins {
 
 group 'org.example'
 version '1.0-SNAPSHOT'
-
 repositories {
     mavenCentral()
 }
@@ -20,7 +19,7 @@ dependencies {
 
     testCompileOnly 'org.projectlombok:lombok:1.18.28'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.28'
-
+    implementation("com.itextpdf:itextpdf:5.5.13")
 }
 
 test {

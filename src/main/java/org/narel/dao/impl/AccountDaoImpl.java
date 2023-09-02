@@ -1,6 +1,7 @@
 package org.narel.dao.impl;
 
 import org.narel.connection.Pool;
+import org.narel.connection.PoolImpl;
 import org.narel.dao.AccountDao;
 import org.narel.dao.BaseDao;
 import org.narel.entity.Account;
@@ -16,11 +17,18 @@ public class AccountDaoImpl extends BaseDao<Account> implements AccountDao {
     private static final String GET_ACCOUNT_BY_ID_QUERY = "SELECT id, accountnumber,bankid,ownerid,currency,amount,openingdate FROM account WHERE id = ?::uuid";
     private static final String DELETE_ACCOUNT_QUERY = "DELETE FROM account WHERE id = ?::uuid";
     private static final String ADD_ACCOUNT_QUERY = "INSERT INTO account(id,accountnumber,bankid,ownerid,currency,amount,openingdate) VALUES (?::uuid, ?, ?::uuid, ?::uuid, ?, ?, ?)";
-    private static final String UPDATE_ACCOUNT_QUERY = "UPDATE account SET id,accountnumber,bankid,ownerid,currency,amount,openingdate VALUES (?::uuid, ?, ?::uuid, ?::uuid, ?, ?,?)";
+    private static final String UPDATE_ACCOUNT_QUERY = "UPDATE account SET id, accountnumber,bankid,ownerid,currency,amount,openingdate = ? WHERE id = ?::uuid,?,";
     private static final String GET_ACCOUNTS_BY_USER_ID = "SELECT id,accountnumber,bankid,ownerid,currency,amount,openingdate FROM account WHERE ownerid = ?::uuid";
 
     public AccountDaoImpl(Pool poll) {
+
         super(poll);
+    }
+
+    public static void main(String[] args) {
+      AccountDaoImpl accountDao = new AccountDaoImpl(new PoolImpl());
+
+      accountDao.update(new Account());
     }
 
     @Override

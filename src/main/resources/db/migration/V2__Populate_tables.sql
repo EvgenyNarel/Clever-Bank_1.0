@@ -129,5 +129,31 @@ INSERT INTO account
 VALUES (uuid_generate_v4(), '39DEFGHIJKLM7890', '84a2bc6d-633b-4dd8-b2de-d7a6fc35b28a', 'a3006eb2-938d-439a-831c-ebd9f23ebfcb', 'BYN', 50000, '2023-05-28');
 INSERT INTO account
 VALUES (uuid_generate_v4(), '40PQRSTUVWXYZ678', '84a2bc6d-633b-4dd8-b2de-d7a6fc35b28a', 'c58c7e62-3501-41e0-9461-4af251e3804d', 'BYN', 80000, '2023-05-14');
+INSERT INTO account
+VALUES ('c48ed62a-06eb-4c2e-b332-62e1b1676a44', '40PQRSTUVWXYZ680', '0e549729-183f-4c8e-b68c-401855423301', 'fa1dfe9b-fb59-4490-813d-69abb4201371', 'BYN', 80000, '2023-06-15');
+INSERT INTO account
+VALUES ('e3454e71-e9e5-4bbe-8f8d-f210b6c006d1', '40PQRSTUVWXYZ692', '837dd917-464e-4c1d-80cf-7e2a2de7cc80', 'f7500bc3-955a-44c2-868b-13576d8eb874', 'BYN', 80000, '2023-05-14');
+INSERT INTO account
+VALUES ('a42ca913-a684-43a6-851c-edd9fe83c4e3', '40PQRSTUVWXYZ644', '0e549729-183f-4c8e-b68c-401855423301', '26a9446e-5f62-4f2e-92f5-71faafedb538', 'BYN', 80000, '2023-05-14');
 
-INSERT INTO operation VALUES (uuid_generate_v4(),'c58c7e62-3501-41e0-9461-4af251e3804d','fa1dfe9b-fb59-4490-813d-69abb4201371',)
+INSERT INTO operation
+VALUES (uuid_generate_v4(),'c48ed62a-06eb-4c2e-b332-62e1b1676a44','c48ed62a-06eb-4c2e-b332-62e1b1676a44','REPLENISHMENT',100,'2023-01-16');
+INSERT INTO operation
+VALUES (uuid_generate_v4(),'c48ed62a-06eb-4c2e-b332-62e1b1676a44','c48ed62a-06eb-4c2e-b332-62e1b1676a44','REPLENISHMENT',200,'2022-01-17');
+INSERT INTO operation
+VALUES (uuid_generate_v4(),'c48ed62a-06eb-4c2e-b332-62e1b1676a44','c48ed62a-06eb-4c2e-b332-62e1b1676a44','REPLENISHMENT',300,'2023-02-18');
+INSERT INTO operation
+VALUES (uuid_generate_v4(),'c48ed62a-06eb-4c2e-b332-62e1b1676a44','c48ed62a-06eb-4c2e-b332-62e1b1676a44','WITHDRAWAL',50,'2023-01-16');
+INSERT INTO operation
+VALUES (uuid_generate_v4(),'a42ca913-a684-43a6-851c-edd9fe83c4e3','a42ca913-a684-43a6-851c-edd9fe83c4e3','WITHDRAWAL',60,'2022-01-17');
+INSERT INTO operation
+VALUES (uuid_generate_v4(),'c48ed62a-06eb-4c2e-b332-62e1b1676a44','c48ed62a-06eb-4c2e-b332-62e1b1676a44','WITHDRAWAL',70,'2023-02-18');
+INSERT INTO operation
+VALUES (uuid_generate_v4(),'e3454e71-e9e5-4bbe-8f8d-f210b6c006d1','a42ca913-a684-43a6-851c-edd9fe83c4e3','TRANSFER',50,'2022-05-16');
+INSERT INTO operation
+VALUES (uuid_generate_v4(),'a42ca913-a684-43a6-851c-edd9fe83c4e3','a42ca913-a684-43a6-851c-edd9fe83c4e3','REPLENISHMENT',50,'2022-03-16');
+INSERT INTO operation
+VALUES (uuid_generate_v4(),'c48ed62a-06eb-4c2e-b332-62e1b1676a44','c48ed62a-06eb-4c2e-b332-62e1b1676a44','WITHDRAWAL',200,'2022-03-16');
+INSERT INTO operation
+VALUES (uuid_generate_v4(),'a42ca913-a684-43a6-851c-edd9fe83c4e3','a42ca913-a684-43a6-851c-edd9fe83c4e3','WITHDRAWAL',300,'2023-04-16');
+
