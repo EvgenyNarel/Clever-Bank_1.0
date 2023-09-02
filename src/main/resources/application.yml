@@ -8,3 +8,6 @@ datasource:
   url: jdbc:postgresql://localhost:5433/banks
   user: admin
   password: admin
+
+  pool:
+    clazz: org.narel.pool.PoolImpl
