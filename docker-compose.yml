@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  postgres:
+    container_name: postgres2
+    image: postgres:15.4
+    restart: always
+    environment:
+      POSTGRES_DB: 'banks'
+      POSTGRES_USER: 'admin'
+      POSTGRES_PASSWORD: 'admin'
+    ports:
+      - '5433:5432'
+
+#  tomcat-server:
+#    container_name: tomcat-server
+#    image: tomcat:9.0.39
+#    ports:
+#      - 8080:8080
