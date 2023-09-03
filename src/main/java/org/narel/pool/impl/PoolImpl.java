@@ -62,14 +62,15 @@ public class PoolImpl implements Pool {
         );
     }
 
-    private static Connection connection() throws SQLException {
+    @SneakyThrows
+    private static Connection connection() {
+        Class.forName(datasourceProperties.getDriverClassName());
         return DriverManager.getConnection(
                 datasourceProperties.getUrl(),
                 datasourceProperties.getUser(),
                 datasourceProperties.getPassword()
         );
     }
-
     @Override
     public void close() {
         originalConnections.forEach(connection -> {

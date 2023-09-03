@@ -2,8 +2,6 @@ package org.narel.model.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import org.narel.entity.Account;
-import org.narel.entity.Customer;
 import org.narel.entity.Operation;
 import org.narel.entity.enums.Currency;
 import org.narel.entity.enums.OperationKind;
@@ -16,6 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Builder
+@Data
 public class OperationDto {
 
     private UUID id;
@@ -40,7 +39,7 @@ public class OperationDto {
                 .senderId(operation.getSenderId())
                 .recipientId(operation.getRecipientId())
                 .currency(operation.getCurrency())
-                .operationKind(operation.getOperationKind())
+                .operationKind(operation.getKind())
                 .amount(operation.getAmount())
                 .operationDate(operation.getOperationDate())
                 .build();

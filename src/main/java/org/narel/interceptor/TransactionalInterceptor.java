@@ -16,7 +16,7 @@ import java.sql.Connection;
 public class TransactionalInterceptor {
 
     @SneakyThrows
-    @Around("execution(* *(..)) && @annotation(org.narel.annotations.Transactional)")
+    @Around("execution(* *(..)) && @annotation(org.narel.interceptor.annotations.Transactional)")
     public Object wrapInTransaction(ProceedingJoinPoint joinPoint) {
         Object proceed;
         log.debug("starting the transaction of the '{}#{}{}' method",

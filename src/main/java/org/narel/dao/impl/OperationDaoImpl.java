@@ -16,8 +16,7 @@ import java.util.UUID;
 
 public class OperationDaoImpl extends BaseCrudDao<Operation> implements OperationDao {
 
-    private static final String GET_OPERATIONS_BY_ACCOUNT_ID = "SELECT id,senderid,recipientid,kind,amount,operationdate FROM operation WHERE senderid = ?::uuid or recipientid = ?::uuid";
-
+    private static final String GET_OPERATIONS_BY_ACCOUNT_ID = "SELECT id,senderid,recipientid,kind,currency,amount,operationdate FROM operation WHERE senderid = ?::uuid or recipientid = ?::uuid";
     private static class OperationDaoImplHandler {
         private final static OperationDaoImpl instance = new OperationDaoImpl();
     }
@@ -36,6 +35,7 @@ public class OperationDaoImpl extends BaseCrudDao<Operation> implements Operatio
              PreparedStatement statement = connection.prepareStatement(GET_OPERATIONS_BY_ACCOUNT_ID)) {
 
             statement.setString(1, String.valueOf(customerId));
+            statement.setString(2, String.valueOf(customerId));
             return ResultSetMapper.mapObjects(statement.executeQuery(), Operation.class);
         } catch (SQLException e) {
             throw new DAOException(e);

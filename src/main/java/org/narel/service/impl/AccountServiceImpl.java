@@ -1,6 +1,6 @@
 package org.narel.service.impl;
 
-import org.narel.annotations.Transactional;
+import org.narel.interceptor.annotations.Transactional;
 import org.narel.dao.AccountDao;
 import org.narel.dao.BankDao;
 import org.narel.dao.CustomerDao;
@@ -24,6 +24,13 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class AccountServiceImpl implements AccountService {
+    private static class AccountServiceImplHandler {
+        private final static AccountServiceImpl instance = new AccountServiceImpl();
+    }
+
+    public static AccountServiceImpl getInstance() {
+        return AccountServiceImpl.AccountServiceImplHandler.instance;
+    }
 
     private final AccountDao accountDao = ObjectFactory.getObject(AccountDao.class);
     private final CustomerDao customerDao = ObjectFactory.getObject(CustomerDao.class);
@@ -41,7 +48,7 @@ public class AccountServiceImpl implements AccountService {
                 .id(UUID.randomUUID())
                 .senderId(null)
                 .recipientId(account.getId())
-                .operationKind(OperationKind.REPLENISHMENT)
+                .kind(OperationKind.REPLENISHMENT)
                 .amount(amount)
                 .operationDate(Instant.now())
                 .build();
@@ -62,7 +69,7 @@ public class AccountServiceImpl implements AccountService {
                 .id(UUID.randomUUID())
                 .senderId(account.getId())
                 .recipientId(null)
-                .operationKind(OperationKind.WITHDRAWAL)
+                .kind(OperationKind.WITHDRAWAL)
                 .amount(amount)
                 .operationDate(Instant.now())
                 .build();
@@ -89,7 +96,7 @@ public class AccountServiceImpl implements AccountService {
                 .id(UUID.randomUUID())
                 .senderId(senderAccount.getId())
                 .recipientId(recipientAccount.getId())
-                .operationKind(OperationKind.TRANSFER)
+                .kind(OperationKind.TRANSFER)
                 .amount(amount)
                 .operationDate(Instant.now())
                 .build();
@@ -103,9 +110,8 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public ExtractDto makeExtract(String accountNumber, Period period) {
         Account account = accountDao.getAccountByAccountNumber(accountNumber);
-
         ExtractDto extract = ExtractDto.builder()
-                .bankName(bankDao.findById(account.getId()).getBankName())
+                .bankName(bankDao.findById(account.getBankId()).getBankName())
                 .ownerFullName(customerDao.findById(account.getOwnerId()).getFullName())
                 .accountNumber(accountNumber)
                 .currency(account.getCurrency())
@@ -124,11 +130,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public MoneyStatementDto makeMoneyStatement(String accountNumber, Period period) {
         MoneyStatementDto moneyStatement = MoneyStatementDto.from(accountDao.getMoneyStatement(
-                accountDao.getAccountByAccountNumber(accountNumber).getId(),
-                period
+                accountDao.getAccountByAccountNumber(accountNumber).getId(),period
         ));
 
-        checkSaver.save(moneyStatement);
+        checkSaver.save(moneyStatement,period);
 
         return moneyStatement;
     }
