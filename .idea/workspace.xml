@@ -5,27 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0b6a2b4b-87af-482e-9ea3-3fc0d9b46e54" name="Changes" comment="refact">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/log_file.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/log_file.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/check/extract1.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/annotations/Transactional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/interceptor/annotations/Transactional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/BaseCrudDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/BaseCrudDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/OperationDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/OperationDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/entity/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/entity/Operation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/AccountDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/AccountDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/AccountDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/AccountDaoImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/entity/enums/OperationKind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/entity/enums/OperationKind.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/factory/ObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/factory/ObjectFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/interceptor/ServiceMethodsLogInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/interceptor/ServiceMethodsLogInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/interceptor/TransactionalInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/interceptor/TransactionalInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/model/Period.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/model/Period.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/ExtractDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/ExtractDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/MoneyStatementDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/MoneyStatementDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/OperationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/OperationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/pool/impl/PoolImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/pool/impl/PoolImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/saver/CheckSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/saver/CheckSaver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/saver/impl/CheckSaverImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/saver/impl/CheckSaverImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/service/CheckService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/job/PercentJob.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/service/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/service/AccountService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/service/impl/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +79,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
-    "last_opened_file_path": "C:/Users/narel/Desktop/banks (3)",
+    "last_opened_file_path": "C:/Users/narel/Desktop/banks (4)",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -114,6 +100,9 @@
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\JavaProjeckt\Clever-Bank\src\main\java\org\narel\job" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="org.narel.dao.impl" />
@@ -300,8 +289,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/narel/service/impl/AccountServiceImpl.java</url>
-          <line>141</line>
+          <line>165</line>
           <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/narel/dao/AccountDao.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
