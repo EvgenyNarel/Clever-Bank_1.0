@@ -8,14 +8,13 @@ import java.time.Instant;
 import java.util.UUID;
 
 @Data
-public class Account {
+public class Account implements Entity {
 
     private UUID id;
     private String accountNumber;
-    private Bank bank;
-    private Customer owner;
+    private UUID bankId;
+    private UUID ownerId;
     private Currency currency;
     private BigDecimal amount;
     private Instant openingDate;
-
 }

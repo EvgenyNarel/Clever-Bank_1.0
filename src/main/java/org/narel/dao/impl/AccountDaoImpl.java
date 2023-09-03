@@ -1,92 +1,116 @@
 package org.narel.dao.impl;
 
-import org.narel.connection.Pool;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.narel.dao.AccountDao;
-import org.narel.dao.BaseDao;
 import org.narel.entity.Account;
+import org.narel.entity.MoneyStatement;
 import org.narel.exception.DAOException;
-import org.narel.mapper.ResultSetMapper;
+import org.narel.model.Period;
+import org.narel.utils.ResultSetMapper;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
-public class AccountDaoImpl extends BaseDao<Account> implements AccountDao {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class AccountDaoImpl extends BaseCrudDao<Account> implements AccountDao {
 
-    private static final String GET_ACCOUNT_BY_ID_QUERY = "SELECT id, accountnumber,bankid,ownerid,currency,amount,openingdate FROM account WHERE id = ?::uuid";
-    private static final String DELETE_ACCOUNT_QUERY = "DELETE FROM account WHERE id = ?::uuid";
-    private static final String ADD_ACCOUNT_QUERY = "INSERT INTO account(id,accountnumber,bankid,ownerid,currency,amount,openingdate) VALUES (?::uuid, ?, ?::uuid, ?::uuid, ?, ?, ?)";
-    private static final String UPDATE_ACCOUNT_QUERY = "UPDATE account SET id,accountnumber,bankid,ownerid,currency,amount,openingdate VALUES (?::uuid, ?, ?::uuid, ?::uuid, ?, ?,?)";
-    private static final String GET_ACCOUNTS_BY_USER_ID = "SELECT id,accountnumber,bankid,ownerid,currency,amount,openingdate FROM account WHERE ownerid = ?::uuid";
+    private static final String GET_ACCOUNTS_BY_USER_ID_QUERY = "SELECT id,accountnumber,bankid,ownerid,currency,amount,openingdate FROM account WHERE ownerid = ?::uuid";
+    private static final String GET_ACCOUNT_BY_ACCOUNT_NUMBER_QUERY = "SELECT id,accountnumber,bankid,ownerid,currency,amount,openingdate FROM account WHERE accountnumber = ?";
+    private static final String GET_ALL_ACCOUNT_QUERY = "SELECT id,accountnumber,bankid,ownerid,currency,amount,openingdate FROM account";
+    private static final String GET_MONEY_STATEMENT_QUERY = """
+                    WITH income_table AS (
+                        SELECT a.id accountId, SUM(o1.amount) income
+                        FROM account a
+                        JOIN operation o1 on a.id = o1.recipientid
+                        WHERE a.id = ?
+                        AND operationdate BETWEEN ? AND ?
+                        GROUP BY a.id
+                    ), expense_table AS (
+                        SELECT a.id accountId, SUM(o1.amount) expense
+                        FROM account a
+                        JOIN operation o1 on a.id = o1.senderid
+                        WHERE a.id = ?
+                        AND operationdate BETWEEN ? AND ?
+                        GROUP BY a.id
+                    )
 
-    public AccountDaoImpl(Pool poll) {
-        super(poll);
+                    SELECT fullname, b.bankname, a.accountnumber, a.currency, a.openingdate, a.amount, income, expense
+                    FROM account a
+                    JOIN customer c on a.ownerid = c.id
+                    JOIN bank b on a.bankid = b.id
+                    JOIN income_table on income_table.accountId = a.id
+                    JOIN expense_table on expense_table.accountId = a.id
+                    WHERE a.id = ?;
+            """;
+
+    private static class AccountDaoImplHandler {
+        private final static AccountDaoImpl instance = new AccountDaoImpl();
     }
 
-    @Override
-    public Account findById(UUID id) {
-        return findById(GET_ACCOUNT_BY_ID_QUERY, id, Account.class);
+    public static AccountDaoImpl getInstance() {
+        return AccountDaoImpl.AccountDaoImplHandler.instance;
     }
 
-    @Override
-    public Account create(Account entity) {
-        try (Connection connection = poll.getConnection();
-             PreparedStatement statement = connection.prepareStatement(ADD_ACCOUNT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
-
-            statement.setString(1, String.valueOf(entity.getId()));
-            statement.setString(2, entity.getAccountNumber());
-            statement.setString(3, String.valueOf(entity.getBank().getId()));
-            statement.setString(4, String.valueOf(entity.getOwner().getId()));
-            statement.setString(5, entity.getCurrency().name());
-            statement.setBigDecimal(6, entity.getAmount());
-            statement.setTimestamp(7, new java.sql.Timestamp(entity.getOpeningDate().toEpochMilli()));
-            if (statement.executeUpdate() == 0) {
-                throw new DAOException("Creating the account is failed, no rows is affected");
-            }
-            ResultSet generatedKeys = statement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                entity.setId(generatedKeys.getObject(1, UUID.class));
-            } else {
-                throw new DAOException("The account key isn't fetched from database");
-            }
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-
-        return entity;
-    }
-
-    @Override
-    public Account update(Account entity) {
-        try (Connection connection = poll.getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_ACCOUNT_QUERY)) {
-            statement.setString(1, String.valueOf(entity.getId()));
-            statement.setString(2, entity.getAccountNumber());
-            statement.setString(3, String.valueOf(entity.getBank().getId()));
-            statement.setString(4, String.valueOf(entity.getOwner().getId()));
-            statement.setString(5, entity.getCurrency().name());
-            statement.setBigDecimal(6, entity.getAmount());
-            statement.setTimestamp(7, new java.sql.Timestamp(entity.getOpeningDate().toEpochMilli()));
-            if (statement.executeUpdate() == 0) {
-                throw new DAOException("Updating the account is failed, no rows is affected");
-            }
-            return entity;
-        } catch (SQLException e) {
-            throw new DAOException(e);
-        }
-    }
-
-    @Override
-    public void delete(UUID id) {
-        delete(DELETE_ACCOUNT_QUERY, id);
+    protected Class<Account> clazz() {
+        return Account.class;
     }
 
     @Override
     public List<Account> getAccountsByOwnerId(UUID ownerId) {
-        try (Connection connection = poll.getConnection(); PreparedStatement statement = connection.prepareStatement(GET_ACCOUNTS_BY_USER_ID)) {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ACCOUNTS_BY_USER_ID_QUERY)) {
+
             statement.setString(1, String.valueOf(ownerId));
             return ResultSetMapper.mapObjects(statement.executeQuery(), Account.class);
         } catch (SQLException e) {
             throw new DAOException(e);
         }
     }
+
+    @Override
+    public MoneyStatement getMoneyStatement(UUID id, Period period) {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_MONEY_STATEMENT_QUERY)) {
+
+            statement.setObject(1, id);
+            statement.setTimestamp(2, new Timestamp(period.from().toEpochMilli()));
+            statement.setTimestamp(3, new Timestamp(period.to().toEpochMilli()));
+            statement.setObject(4, id);
+            statement.setTimestamp(5, new Timestamp(period.from().toEpochMilli()));
+            statement.setTimestamp(6, new Timestamp(period.to().toEpochMilli()));
+            statement.setObject(7, id);
+
+            return ResultSetMapper.mapObject(statement.executeQuery(), MoneyStatement.class);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+
+    }
+
+    @Override
+    public Account getAccountByAccountNumber(String accountNumber) {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ACCOUNT_BY_ACCOUNT_NUMBER_QUERY)) {
+
+            statement.setString(1, accountNumber);
+            return ResultSetMapper.mapObject(statement.executeQuery(), Account.class);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+    @Override
+    public List<Account> getAll() {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ALL_ACCOUNT_QUERY)) {
+            return ResultSetMapper.mapObjects(statement.executeQuery(), Account.class);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
 }
+

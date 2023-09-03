@@ -7,6 +7,11 @@ import java.util.UUID;
 
 public interface OperationDao extends EntityDao<Operation> {
 
-    List<Operation> getByCustomerId(UUID customerId);
+    /**
+     *
+     * @param customerId
+     * @return
+     */
+    List<Operation> getByAccountId(UUID customerId);
 }
 
