@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum OperationKind {
-    REPLENISHMENT("Пополнение"),
-    WITHDRAWAL("Снятие"),
-    ACCRUAL("Начисление процентов"),
-    TRANSFER("Перевод");
+    REPLENISHMENT("РџРѕРїРѕР»РЅРµРЅРёРµ"),
+    WITHDRAWAL("РЎРЅСЏС‚РёРµ"),
+    ACCRUAL("РќР°С‡РёСЃР»РµРЅРёРµ РїСЂРѕС†РµРЅС‚РѕРІ"),
+    TRANSFER("РџРµСЂРµРІРѕРґ");
 
     private final String kind;
 
