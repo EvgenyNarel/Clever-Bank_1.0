@@ -6,24 +6,26 @@
   <component name="ChangeListManager">
     <list default="true" id="0b6a2b4b-87af-482e-9ea3-3fc0d9b46e54" name="Changes" comment="refact">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/AccountDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/AccountDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/BaseCrudDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/BaseCrudDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/EntityDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/EntityDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/OperationDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/OperationDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/AccountDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/AccountDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/BankDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/BankDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/CustomerDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/CustomerDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/log_file.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/log_file.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/check/extract1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/annotations/Transactional.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/interceptor/annotations/Transactional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/BaseCrudDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/BaseCrudDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/OperationDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/dao/impl/OperationDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/entity/Operation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/entity/Operation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/entity/enums/OperationKind.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/entity/enums/OperationKind.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/exception/AccountException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/exception/AccountException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/model/CreditDebitDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/model/OperationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/OperationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/pool/Pool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/pool/Pool.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/pool/PoolImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/pool/impl/PoolImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/service/AccountOperationsService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/service/CheckService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/service/CheckService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1__Create_initial_database_schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1__Create_initial_database_schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V2__Populate_tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V2__Populate_tables.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/factory/ObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/factory/ObjectFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/interceptor/ServiceMethodsLogInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/interceptor/ServiceMethodsLogInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/interceptor/TransactionalInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/interceptor/TransactionalInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/model/Period.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/model/Period.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/ExtractDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/ExtractDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/MoneyStatementDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/MoneyStatementDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/OperationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/model/dto/OperationDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/pool/impl/PoolImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/pool/impl/PoolImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/saver/CheckSaver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/saver/CheckSaver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/saver/impl/CheckSaverImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/saver/impl/CheckSaverImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/service/CheckService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/narel/service/impl/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/narel/service/impl/AccountServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,10 +75,10 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2UWBfyklq1WSM7ozXHkJNbi50nH" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -91,7 +93,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "create.test.in.the.same.root": "true",
-    "last_opened_file_path": "C:/Users/narel/Desktop/banks (2)",
+    "last_opened_file_path": "C:/Users/narel/Desktop/banks (3)",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -118,13 +120,13 @@
       <recent name="org.narel.service" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.narel.Main" />
+  <component name="RunManager" selected="Application.CheckSaverImpl">
+    <configuration name="AccountServiceImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.narel.service.impl.AccountServiceImpl" />
       <module name="org.example.Clever-Bank.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.narel.*" />
+          <option name="PATTERN" value="org.narel.service.impl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -132,9 +134,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="CheckSaverImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.narel.saver.impl.CheckSaverImpl" />
+      <module name="org.example.Clever-Bank.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.narel.saver.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.narel.Main" />
-      <module name="Clever-Bank.main" />
+      <module name="org.example.Clever-Bank.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.narel.*" />
@@ -191,26 +206,13 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.postgres: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="postgres" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CheckSaverImpl" />
+        <item itemvalue="Application.AccountServiceImpl" />
         <item itemvalue="Gradle.AccountOperationsServiceTest.topUp" />
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="JUnit.AccountDaoImplTest.findByIdTest" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Docker.docker-compose.yml.postgres: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -222,7 +224,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1693045565508</updated>
-      <workItem from="1693676497689" duration="11397000" />
+      <workItem from="1693676497689" duration="15400000" />
+      <workItem from="1693733167320" duration="31592000" />
     </task>
     <task id="LOCAL-00001" summary="refact">
       <option name="closed" value="true" />
@@ -232,7 +235,31 @@
       <option name="project" value="LOCAL" />
       <updated>1693684264021</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="refact">
+      <option name="closed" value="true" />
+      <created>1693728092129</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1693728092130</updated>
+    </task>
+    <task id="LOCAL-00003" summary="refact">
+      <option name="closed" value="true" />
+      <created>1693728105364</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1693728105364</updated>
+    </task>
+    <task id="LOCAL-00004" summary="refact">
+      <option name="closed" value="true" />
+      <created>1693759111342</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1693759111343</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +293,20 @@
           <line>22</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/narel/model/dto/OperationDto.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/narel/service/impl/AccountServiceImpl.java</url>
+          <line>141</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="40" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

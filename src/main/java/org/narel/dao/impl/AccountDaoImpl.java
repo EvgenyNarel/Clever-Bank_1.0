@@ -21,7 +21,7 @@ public class AccountDaoImpl extends BaseCrudDao<Account> implements AccountDao {
 
     private static final String GET_ACCOUNTS_BY_USER_ID_QUERY = "SELECT id,accountnumber,bankid,ownerid,currency,amount,openingdate FROM account WHERE ownerid = ?::uuid";
     private static final String GET_ACCOUNT_BY_ACCOUNT_NUMBER_QUERY = "SELECT id,accountnumber,bankid,ownerid,currency,amount,openingdate FROM account WHERE accountnumber = ?";
-
+    private static final String GET_ALL_ACCOUNT_QUERY = "SELECT id,accountnumber,bankid,ownerid,currency,amount,openingdate FROM account";
     private static final String GET_MONEY_STATEMENT_QUERY = """
                     WITH income_table AS (
                         SELECT a.id accountId, SUM(o1.amount) income
@@ -94,14 +94,23 @@ public class AccountDaoImpl extends BaseCrudDao<Account> implements AccountDao {
 
     @Override
     public Account getAccountByAccountNumber(String accountNumber) {
-            try (Connection connection = pool.getConnection();
-                 PreparedStatement statement = connection.prepareStatement(GET_ACCOUNT_BY_ACCOUNT_NUMBER_QUERY)) {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ACCOUNT_BY_ACCOUNT_NUMBER_QUERY)) {
 
-                statement.setString(1, accountNumber);
-                return ResultSetMapper.mapObject(statement.executeQuery(), Account.class);
-            } catch (SQLException e) {
-                throw new DAOException(e);
-            }
+            statement.setString(1, accountNumber);
+            return ResultSetMapper.mapObject(statement.executeQuery(), Account.class);
+        } catch (SQLException e) {
+            throw new DAOException(e);
         }
     }
+    @Override
+    public List<Account> getAll() {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(GET_ALL_ACCOUNT_QUERY)) {
+            return ResultSetMapper.mapObjects(statement.executeQuery(), Account.class);
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        }
+    }
+}
 

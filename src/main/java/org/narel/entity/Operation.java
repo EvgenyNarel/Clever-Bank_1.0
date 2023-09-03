@@ -21,7 +21,7 @@ public class Operation implements Entity {
     private UUID senderId;
     private UUID recipientId;
     private Currency currency;
-    private OperationKind operationKind;
+    private OperationKind kind;
     private BigDecimal amount;
     private Instant operationDate;
 }

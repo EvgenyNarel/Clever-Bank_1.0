@@ -18,8 +18,16 @@ public class ServiceMethodsLogInterceptor {
                 joinPoint.getSignature().getName(),
                 joinPoint.getArgs());
 
-        Object proceed = joinPoint.proceed();
-
+        Object proceed;
+        try {
+            proceed = joinPoint.proceed();
+        } catch (Exception e) {
+            log.info("finished the call of the '{}#{}' method with output {}",
+                    joinPoint.getSignature().getDeclaringTypeName(),
+                    joinPoint.getSignature().getName(),
+                    e);
+            throw e;
+        }
         log.info("finished the call of the '{}#{}' method with output {}",
                 joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(),

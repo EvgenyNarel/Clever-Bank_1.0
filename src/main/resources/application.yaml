@@ -9,3 +9,6 @@ datasource:
   user: admin
   password: admin
 
+percents:
+  count: 1
+

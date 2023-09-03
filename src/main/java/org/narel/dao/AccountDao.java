@@ -30,4 +30,10 @@ public interface AccountDao extends EntityDao<Account> {
      * @return
      */
     Account getAccountByAccountNumber(String accountNumber);
+
+    /**
+     *
+     * @return
+     */
+    List<Account> getAll();
 }

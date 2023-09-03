@@ -16,12 +16,12 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 /**
- *
  * @param <T>
  */
 public abstract class BaseCrudDao<T extends Entity> implements EntityDao<T> {
 
     protected final Pool pool = ObjectFactory.getObject(Pool.class);
+
     protected abstract Class<T> clazz();
 
     @Override
@@ -37,7 +37,8 @@ public abstract class BaseCrudDao<T extends Entity> implements EntityDao<T> {
 
     @Override
     public T create(T entity) {
-        try (Connection connection = pool.getConnection();             PreparedStatement statement = StatementProvider.statementForCreation(connection, entity)) {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = StatementProvider.statementForCreation(connection, entity)) {
 
             if (statement.executeUpdate() == 0) {
                 throw new DAOException("Creating the " + entity.getClass().getSimpleName() + " is failed, no rows is affected");
